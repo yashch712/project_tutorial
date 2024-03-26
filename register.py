@@ -125,44 +125,35 @@ b1.place(x=330,y=420,width=200)
 # functionality for registeration page:
 
 def register_data():
-    if var_fname.get()=="" or var_email.get()=="" or var_securityQ.get()=="Select":
-        messagebox.showerror("Error","All fields are required")
-    elif var_pass.get()!=var_confpass.get():
-        messagebox.showerror("Error","password & confirm password must be same")
-    elif var_check.get()==0:
-        messagebox.showerror("Error","please agree our terms and condition")
+    if var_fname.get() == "" or var_email.get() == "" or var_securityQ.get() == "Select":
+        messagebox.showerror("Error", "All fields are required")
+    elif var_pass.get() != var_confpass.get():
+        messagebox.showerror("Error", "Password & Confirm Password must be the same")
+    elif var_check.get() == 0:
+        messagebox.showerror("Error", "Please agree to our Terms and Conditions")
     else:
-        conn=mysql.connector.connect(host="localhost",user="root",password="07121999",database="hotel")
-        my_cursor=conn.cursor()
-        query=("select * from register where email=%s")
-        value=(var_email.get(),)
-        my_cursor.execute(query,value)
-        row=my_cursor.fetchone()
-        if row!=None:
-            messagebox.showerror("Error","user already exist,please try another email")
+        conn = mysql.connector.connect(host="localhost", user="root",password="07121999", database="hotelm")
+        my_cursor = conn.cursor()
+        query = ("select * from register where email = %s")
+        value = (var_email.get(),)
+        my_cursor.execute(query, value)
+        row = my_cursor.fetchone()
+        if row != None:
+            messagebox.showerror("Error", "User already exists. Please try another email.")
         else:
             my_cursor.execute("insert into register values(%s,%s,%s,%s,%s,%s,%s)",(
                                                                                     var_fname.get(),
-                                                                                    var_lname(),
+                                                                                    var_lname.get(),
                                                                                     var_contact.get(),
                                                                                     var_email.get(),
                                                                                     var_securityQ.get(),
                                                                                     var_securityA.get(),
-                                                                                    var_pass.get()      
-                                                                                ))
-        conn.commit()
-        conn.close()
-        messagebox.showinfo
-        
-    
+                                                                                    var_pass.get()
+            
+                                                                                    ))
+            
+            # my_cursor.execute(insert_query, insert_values)
+            conn.commit()
+            conn.close()
+            messagebox.showinfo("Success", "Registered Successfully")
 
-
-
-
-
-
-
-
-
-
-root.mainloop()
