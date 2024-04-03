@@ -3,6 +3,7 @@ import tkinter as tk
 from  PIL import Image,ImageTk
 from customer import Cust_win
 from room import room_booking
+from details import DetailsRoom
 
 
 class HotelManagementSystem:
@@ -10,7 +11,6 @@ class HotelManagementSystem:
         self.root = root
         self.root.title("Hotel Management System")
         self.root.geometry("1550x800+0+0")
-        
         
         # screen_width = root.winfo_screenwidth()
         # screen_height = root.winfo_screenheight()
@@ -54,7 +54,7 @@ class HotelManagementSystem:
         room_btn=Button(btn_frame,text="ROOM",command=self.roombooking,width=22,font=("times new roman",14,"bold"),bg="black",fg="gold",bd=0,cursor="hand2")
         room_btn.grid(row=1,column=0,pady=1)
         
-        details_btn=Button(btn_frame,text="DETAILS",width=22,font=("times new roman",14,"bold"),bg="black",fg="gold",bd=0,cursor="hand2")
+        details_btn=Button(btn_frame,text="DETAILS",command=self.details_room,width=22,font=("times new roman",14,"bold"),bg="black",fg="gold",bd=0,cursor="hand2")
         details_btn.grid(row=2,column=0,pady=1)
         
         report_btn=Button(btn_frame,text="REPORT",width=22,font=("times new roman",14,"bold"),bg="black",fg="gold",bd=0,cursor="hand2")
@@ -91,14 +91,20 @@ class HotelManagementSystem:
         
     def cust_details(self):
         self.new_window=Toplevel(self.root)
+        self.new_window.overrideredirect(True)  
         self.app=Cust_win(self.new_window)
         
         
-    def roombooking(self):
+    def roombooking(self):  
         self.new_window=Toplevel(self.root)
+        self.new_window.overrideredirect(True)  
         self.app=room_booking(self.new_window)
         
         
+    def details_room(self):  
+        self.new_window=Toplevel(self.root)
+        self.new_window.overrideredirect(True)  
+        self.app=DetailsRoom(self.new_window)
         
     
 if __name__ == "__main__":
