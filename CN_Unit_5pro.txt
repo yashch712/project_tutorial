@@ -1,0 +1,38 @@
+# 1 xor operation:
+string = "Hello World"
+result = ""
+for char in string:
+ # XOR the character with 0
+ xor_char = chr(ord(char) ^ 0)
+ result += xor_char
+print(result)
+
+#2 caesar_cipher:
+
+def caesar_cipher(message, shift):
+ # Create an empty string to store the encrypted message
+ encrypted_message = ""
+ # Iterate over each character in the message
+ for char in message:
+ # If the character is an uppercase letter
+ if char.isupper():
+ # Apply the shift and wrap around the alphabet if necessary
+ encrypted_char = chr((ord(char) + shift - 65) % 26 + 65)
+ # If the character is a lowercase letter
+ elif char.islower():
+ # Apply the shift and wrap around the alphabet if necessary
+ encrypted_char = chr((ord(char) + shift - 97) % 26 + 97)
+ else:
+ # If the character is not a letter, leave it as is
+ encrypted_char = char
+ # Append the encrypted character to the encrypted message
+ encrypted_message += encrypted_char
+ # Return the encrypted message
+ return encrypted_message
+# Example usage
+message = "Hello, world!"
+shift = 3
+encrypted_message = caesar_cipher(message, shift)
+print("Original message:", message)
+print("Shift:", shift)
+print("Encrypted message:", encrypted_message)  
